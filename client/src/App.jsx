@@ -7,6 +7,7 @@ import Purchase from "./Components/Purchase";
 import Upload from "./Components/Upload";
 import Navbar from "./Components/NavBar";
 import Home from "./Components/Home";
+import FileUploader from "./Components/FileUpload";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/purchase" element={<Purchase />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/fileUpload" element={<FileUploader />} />
       </Routes>
     </div>
   );
