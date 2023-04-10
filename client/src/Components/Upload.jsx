@@ -55,18 +55,45 @@ export default function UploadPDF() {
           console.log("selected user", selectedUser);
 
           console.log("Credits updated successfully!");
-          const contentString = String.fromCharCode.apply(
-            null,
-            new Uint16Array(fileData)
-          );
-          await createFile({
-            userId: selectedUser.id,
-            name: fileName,
-            content: contentString,
+          const contentBytes = new Uint8Array(fileData);
+          console.log("made content bytes");
+          const adjustedBytes =
+            contentBytes.length % 2 === 0
+              ? contentBytes
+              : contentBytes.slice(0, contentBytes.length - 1);
+          const contentBuffer = adjustedBytes.buffer;
+
+          pdf(contentBuffer).then(function (data) {
+            // number of pages
+            console.log(data.numpages);
+            // number of rendered pages
+            console.log(data.numrender);
+            // PDF info
+            console.log(data.info);
+            // PDF metadata
+            console.log(data.metadata);
+            // PDF.js version
+            // check https://mozilla.github.io/pdf.js/getting_started/
+            console.log(data.version);
+            // PDF text
+            console.log(data.text);
           });
-          setTimeout(() => {
-            navigate("/Home");
-          }, 0);
+
+          console.log("made adjusted bytes", adjustedBytes);
+
+          const contentString = new TextDecoder("ISO-8859-1").decode(
+            adjustedBytes
+          );
+          console.log("content string", contentString);
+
+          // await createFile({
+          //   userId: selectedUser.id,
+          //   name: fileName,
+          //   content: contentString,
+          // });
+          // setTimeout(() => {
+          //   navigate("/Home");
+          // }, 0);
         } catch (error) {
           console.log("Error updating credits:", error);
         }

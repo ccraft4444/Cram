@@ -34,7 +34,7 @@ model Documents {
   id        Int     @id @default(autoincrement())
   userId    Int
   name      String
-  content   Bytes    // 10 MB file size limit
+  content   String// 10 MB file size limit
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
 

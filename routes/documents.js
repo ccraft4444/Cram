@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { asyncErrorHandler } = require("./utils");
 const prisma = require("../prisma/prisma");
+const fileUpload = require("express-fileupload");
+const pdfParse = require("pdf-parse");
 
 router.get(
   "/",
@@ -20,6 +22,18 @@ router.get(
     res.send(myFiles);
   })
 );
+
+router.post("/extract-text", (req, res) => {
+  if (!req.files || !req.files.pdfFile) {
+    res.status(400).send("No PDF file provided");
+    return;
+  }
+  console.log("in the post ");
+  pdfParse(req.files.pdfFile).then((result) => {
+    console.log("in the parse", result.text);
+    res.send(result.text);
+  });
+});
 
 router.get(
   "/:documentId",

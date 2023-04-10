@@ -6,12 +6,17 @@ const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const { COOKIE_SECRET } = process.env;
 const routes = require("./routes");
+const fileUpload = require("express-fileupload");
+const pdfParse = require("pdf-parse");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
-app.use(express.static(path.join(__dirname, "./client", "dist")));
+app.use(express.static(path.join(__dirname, "../client", "build")));
+// app.use(express.static(path.join(__dirname, "client", "src")));
+// app.use(express.static(path.join(__dirname, "./client", "dist")));
 app.use(cookieParser(COOKIE_SECRET));
+app.use(fileUpload()); // apply file upload middleware here
 
 app.get("/health", (req, res) => {
   res.send("All Healthy Good to Go!");
