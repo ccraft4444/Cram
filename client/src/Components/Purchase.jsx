@@ -48,7 +48,7 @@ export default function Purchase() {
     // loginUser({ email: selectedUser.email, password: selectedUser.password });
     console.log("selected user", selectedUser);
     setTimeout(() => {
-      navigate("/upload");
+      navigate("/fileupload");
     }, 0);
     // Redirect the user to the Stripe checkout page
 

@@ -63,22 +63,6 @@ export default function UploadPDF() {
               : contentBytes.slice(0, contentBytes.length - 1);
           const contentBuffer = adjustedBytes.buffer;
 
-          pdf(contentBuffer).then(function (data) {
-            // number of pages
-            console.log(data.numpages);
-            // number of rendered pages
-            console.log(data.numrender);
-            // PDF info
-            console.log(data.info);
-            // PDF metadata
-            console.log(data.metadata);
-            // PDF.js version
-            // check https://mozilla.github.io/pdf.js/getting_started/
-            console.log(data.version);
-            // PDF text
-            console.log(data.text);
-          });
-
           console.log("made adjusted bytes", adjustedBytes);
 
           const contentString = new TextDecoder("ISO-8859-1").decode(

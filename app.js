@@ -1,13 +1,15 @@
 require("dotenv").config();
+const cors = require("cors");
 const express = require("express");
 const path = require("path");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+
 const app = express();
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const { COOKIE_SECRET } = process.env;
 const routes = require("./routes");
 const fileUpload = require("express-fileupload");
-const pdfParse = require("pdf-parse");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
