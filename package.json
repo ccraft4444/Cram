@@ -27,5 +27,6 @@
   },
   "prisma": {
     "seed": "node prisma/seed.js"
-  }
+  },
+  "proxy": "<http://localhost:4242>"
 }
