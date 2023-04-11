@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.52.1",
     "easy-peasy": "^5.2.0",
     "pdfjs-dist": "^3.5.141",
     "react": "^18.2.0",
@@ -16,7 +17,7 @@
     "react-dropzone": "^14.2.3",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
-    "stripe": "^11.17.0",
+    "stripe": "^11.18.0",
     "webpack": "^5.78.0"
   },
   "devDependencies": {
