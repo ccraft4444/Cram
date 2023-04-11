@@ -8,12 +8,18 @@ import Upload from "./Components/Upload";
 import Navbar from "./Components/NavBar";
 import Home from "./Components/Home";
 import FileUploader from "./Components/FileUpload";
+// import StripePayment from "./Components/StripePayment";
+import Cancel from "./Components/Cancel";
+import Success from "./Components/Success";
 
 function App() {
   return (
     <div className="App bg-stone-100">
       <Navbar />
       <Routes>
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
+        {/* <Route path="/" element={<StripePayment />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/purchase" element={<Purchase />} />

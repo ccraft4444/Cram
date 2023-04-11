@@ -3,10 +3,7 @@ import Stripe from "stripe";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-
-const stripe = new Stripe(
-  "sk_test_51MtxiHFQGhTdTKMrIoEm62jgVUkbMeHBhQlH6qD6OfTk3zOW5lioPvPQhGeKMgTPiUY0mAcfohEfEnRvyqxcveJI005zotch9J"
-);
+import { loadStripe } from "@stripe/stripe-js";
 
 export default function Purchase() {
   const { selectedUser, updateCredits, fetchMe, setUser, loginUser } =
@@ -19,6 +16,39 @@ export default function Purchase() {
       console.log("Selected user updated:", selectedUser);
     }
   }, [selectedUser]);
+
+  const makePayment = async () => {
+    try {
+      const tier = tiers[selectedTier];
+      const stripe = await loadStripe(
+        "pk_test_51MtxiHFQGhTdTKMrX9GPXCCrUo0mNRTbQS9SewWuLIpPuQOXDIAlA5qdH8sNNqObfQLwXBI3P7GZmWYfAeTKM46q00NTAC4EIO"
+      );
+      const body = { tier };
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      const response = await fetch(
+        "http://localhost:5000/routes/payment/create-checkout-session",
+        {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(body),
+        }
+      );
+
+      const session = await response.json();
+      console.log("Session created: ", session);
+      const result = stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (result.error) {
+        console.log(result.error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const tiers = [
     { name: "Basic", price: 10, credits: 100 },
@@ -34,11 +64,7 @@ export default function Purchase() {
     const tier = tiers[selectedTier];
 
     // Create a new payment intent with the selected tier price
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: tier.price * 100,
-      currency: "usd",
-      description: `${tier.name} credits`,
-    });
+    makePayment();
 
     // const newTotalCredits = currentCredits + tier.credits;
     // currentCredits = newTotalCredits;
