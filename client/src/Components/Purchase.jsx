@@ -4,12 +4,36 @@ import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios"; // Import axios for API requests
 
 export default function Purchase() {
   const { selectedUser, updateCredits, fetchMe, setUser, loginUser } =
     useAuth();
   const [selectedTier, setSelectedTier] = useState(null);
   const navigate = useNavigate();
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    // Check to see if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+
+    if (query.get("success")) {
+      console.log("successful order");
+      setMessage("Order placed! You will receive an email confirmation.");
+      // Update credits here
+      const tierIndex = parseInt(query.get("tierIndex"));
+      if (!isNaN(tierIndex)) {
+        setSelectedTier(tierIndex);
+        handlePurchase(tierIndex);
+      }
+    }
+
+    if (query.get("canceled")) {
+      setMessage(
+        "Order canceled -- continue to shop around and checkout when you're ready."
+      );
+    }
+  }, []);
 
   useEffect(() => {
     if (selectedUser) {
@@ -17,64 +41,60 @@ export default function Purchase() {
     }
   }, [selectedUser]);
 
-  const makePayment = async () => {
-    try {
-      const tier = tiers[selectedTier];
-      const stripe = await loadStripe(
-        "pk_test_51MtxiHFQGhTdTKMrX9GPXCCrUo0mNRTbQS9SewWuLIpPuQOXDIAlA5qdH8sNNqObfQLwXBI3P7GZmWYfAeTKM46q00NTAC4EIO"
-      );
-      const body = { tier };
-      const headers = {
-        "Content-Type": "application/json",
-      };
-      const response = await fetch(
-        "http://localhost:5000/routes/payment/create-checkout-session",
-        {
-          method: "POST",
-          headers: headers,
-          body: JSON.stringify(body),
-        }
-      );
+  //  price id's: 10: price_1MvpbeFQGhTdTKMrYIpCsYGz
+  // 5: price_1MvpbIFQGhTdTKMrmjHGF4h2
+  // 1: price_1MvpaqFQGhTdTKMrJgYDYhON
 
-      const session = await response.json();
-      console.log("Session created: ", session);
-      const result = stripe.redirectToCheckout({
-        sessionId: session.id,
-      });
-
-      if (result.error) {
-        console.log(result.error);
+  const onCheckout = async (tier) => {
+    // Create a new checkout session
+    const response = await axios.post(
+      "/routes/payments/create-checkout-session",
+      {
+        priceId: tier.priceId,
+        tierIndex: selectedTier, // pass the selected tier index to the server
       }
-    } catch (error) {
-      console.log(error);
-    }
+    );
+    const session = response.data;
+    window.location.href = session.url;
   };
 
   const tiers = [
-    { name: "Basic", price: 10, credits: 100 },
-    { name: "Pro", price: 25, credits: 250 },
-    { name: "Premium", price: 50, credits: 500 },
+    {
+      name: "Basic",
+      price: 0.99,
+      credits: 1,
+      priceId: "price_1MvpaqFQGhTdTKMrJgYDYhON",
+    },
+    {
+      name: "Pro",
+      price: 3.99,
+      credits: 5,
+      priceId: "price_1MvpbIFQGhTdTKMrmjHGF4h2",
+    },
+    {
+      name: "Premium",
+      price: 6.99,
+      credits: 10,
+      priceId: "price_1MvpbeFQGhTdTKMrYIpCsYGz",
+    },
   ];
 
   const handleTierSelection = (index) => {
     setSelectedTier(index);
   };
 
-  const handlePurchase = async () => {
-    const tier = tiers[selectedTier];
+  const handlePurchase = async (tierIndex) => {
+    const tier = tiers[tierIndex];
 
     // Create a new payment intent with the selected tier price
-    makePayment();
 
-    // const newTotalCredits = currentCredits + tier.credits;
-    // currentCredits = newTotalCredits;
     const newTotalCredits = selectedUser.credits + tier.credits;
     const newCredits = await updateCredits({ credits: newTotalCredits });
     setUser({ ...selectedUser, credits: newTotalCredits });
     // loginUser({ email: selectedUser.email, password: selectedUser.password });
     console.log("selected user", selectedUser);
     setTimeout(() => {
-      navigate("/fileupload");
+      navigate("/upload");
     }, 0);
     // Redirect the user to the Stripe checkout page
 
@@ -105,7 +125,7 @@ export default function Purchase() {
       {selectedTier !== null && (
         <button
           onClick={() => {
-            handlePurchase();
+            onCheckout(tiers[selectedTier]);
             // navigate("/upload");
           }}
         >

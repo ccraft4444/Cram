@@ -66,6 +66,7 @@ export default function FileUploader() {
         <button type="submit">Upload</button>
       </form>
       <textarea value={text} readOnly></textarea>
+      <button onClick={() => navigate("/purchase")}>Purchase Credits</button>
     </div>
   );
 }

@@ -19,23 +19,36 @@ router.use((req, res, next) => {
 //  price id's: 10: price_1MvpbeFQGhTdTKMrYIpCsYGz
 // 5: price_1MvpbIFQGhTdTKMrmjHGF4h2
 // 1: price_1MvpaqFQGhTdTKMrJgYDYhON
+// ${YOUR_DOMAIN}?canceled=true
 
 router.post("/create-checkout-session", async (req, res) => {
-  const { tier } = req.body;
+  const { priceId, tierIndex } = req.body;
+  console.log("priceId in back", priceId);
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: "price_1MvpaqFQGhTdTKMrJgYDYhON",
+        price: priceId,
         quantity: 1,
       },
     ],
     mode: "payment",
-    success_url: `${YOUR_DOMAIN}?success=true`,
-    cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+    success_url: `http://localhost:5173/success?tierIndex=${tierIndex}`, // pass tierIndex in the success_url
+    cancel_url: `http://localhost:5173/purchase`,
   });
 
-  res.json(session); // Return the session object as JSON instead of redirecting
+  res.json(session);
 });
+
+router.post(
+  "/success",
+  asyncErrorHandler(async (req, res) => {
+    const { tier } = req.body;
+    // update the user's credits based on the selected tier
+    const newTotalCredits = req.user.credits + tier.credits;
+    req.user.credits = newTotalCredits;
+    await req.user.save();
+    res.sendStatus(200);
+  })
+);
 
 module.exports = router;
