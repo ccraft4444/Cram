@@ -90,8 +90,10 @@ export default function Purchase() {
 
     const newTotalCredits = selectedUser.credits + tier.credits;
     const newCredits = await updateCredits({ credits: newTotalCredits });
-    setUser({ ...selectedUser, credits: newTotalCredits });
-    // loginUser({ email: selectedUser.email, password: selectedUser.password });
+    const updatedUser = await fetchMe();
+    setUser(updatedUser);
+    // setUser({ ...selectedUser, credits: newTotalCredits });
+
     console.log("selected user", selectedUser);
     setTimeout(() => {
       navigate("/upload");
