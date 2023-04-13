@@ -7,16 +7,16 @@ import { OpenAI } from "langchain/llms/openai";
 import { PromptTemplate } from "langchain/prompts";
 import { LLMChain } from "langchain/chains";
 
-const { OpenAI } = require("langchain/llms/openai");
+// const { OpenAI } = require("langchain/llms/openai");
 
-const model = new OpenAI({ temperature: 0.9 });
-const template = "Return flashcard set... {studyGuide}?";
-const prompt = new PromptTemplate({
-  template: template,
-  inputVariables: ["studyGuide"],
-});
+// const model = new OpenAI({ temperature: 0.9 });
+// const template = "Return flashcard set... {studyGuide}?";
+// const prompt = new PromptTemplate({
+//   template: template,
+//   inputVariables: ["studyGuide"],
+// });
 
-const chain = new LLMChain({ llm: model, prompt: prompt });
+// const chain = new LLMChain({ llm: model, prompt: prompt });
 
 export default function FileUploader() {
   const { fetchMe, updateCredits, selectedUser, setUser } = useAuth();
@@ -35,10 +35,10 @@ export default function FileUploader() {
     setSelectedFile(event.target.files[0]);
   };
 
-  const generateResponse = async () => {
-    const res = await chain.call({ studyGuide: text });
-    console.log(res);
-  };
+  // const generateResponse = async () => {
+  //   const res = await chain.call({ studyGuide: text });
+  //   console.log(res);
+  // };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
