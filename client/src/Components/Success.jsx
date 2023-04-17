@@ -29,38 +29,18 @@ export default function Success() {
     }
   }, []);
 
-  const handlePurchase = async () => {
-    if (selectedUser && tierIndex !== null) {
-      const tier = tiers[tierIndex];
-
-      const newTotalCredits = selectedUser.credits + tier.credits;
-      const newCredits = await updateCredits({ credits: newTotalCredits });
-
-      // Refresh user information after updating the credits
-      const updatedUser = await fetchMe();
-      setUser(updatedUser);
-
-      console.log("updated user", updatedUser);
-      setTimeout(() => {
-        navigate("/upload");
-      }, 0);
-    } else {
-      console.error("User data is not available");
-    }
-  };
   // ... rest of the component
   return (
     <div>
       <h1>Payment Successful</h1>
       <p>
-        Thank you for your purchase! Collect your credits{" "}
+        Thank you for your purchase!{" "}
         <button
           onClick={() => {
-            handlePurchase();
-            // navigate("/upload");
+            navigate("/fileUpload");
           }}
         >
-          Collect
+          Upload Files
         </button>
       </p>
     </div>
