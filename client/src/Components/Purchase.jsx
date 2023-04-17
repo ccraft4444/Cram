@@ -52,7 +52,14 @@ export default function Purchase() {
       {
         priceId: tier.priceId,
         tierIndex: selectedTier, // pass the selected tier index to the server
+        userId: selectedUser.id,
       }
+    );
+    console.log(
+      "userId in oncheckiut:",
+      selectedUser.id,
+      "tierIndex in oncheckout:",
+      selectedTier
     );
     const session = response.data;
     window.location.href = session.url;
