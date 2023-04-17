@@ -2,6 +2,7 @@ const router = require("express").Router();
 const express = require("express");
 const bodyParser = require("body-parser");
 const { asyncErrorHandler } = require("./utils");
+const prisma = require("../prisma/prisma");
 const stripe = require("stripe")(
   "sk_test_51MtxiHFQGhTdTKMrIoEm62jgVUkbMeHBhQlH6qD6OfTk3zOW5lioPvPQhGeKMgTPiUY0mAcfohEfEnRvyqxcveJI005zotch9J"
 );
@@ -27,6 +28,27 @@ router.use(
   })
 );
 
+const tiers = [
+  {
+    name: "Basic",
+    price: 0.99,
+    credits: 1,
+    priceId: "price_1MvpaqFQGhTdTKMrJgYDYhON",
+  },
+  {
+    name: "Pro",
+    price: 3.99,
+    credits: 5,
+    priceId: "price_1MvpbIFQGhTdTKMrmjHGF4h2",
+  },
+  {
+    name: "Premium",
+    price: 6.99,
+    credits: 10,
+    priceId: "price_1MvpbeFQGhTdTKMrYIpCsYGz",
+  },
+];
+
 //  price id's: 10: price_1MvpbeFQGhTdTKMrYIpCsYGz
 // 5: price_1MvpbIFQGhTdTKMrmjHGF4h2
 // 1: price_1MvpaqFQGhTdTKMrJgYDYhON
@@ -51,9 +73,16 @@ router.use(
 // });
 
 router.post("/create-checkout-session", async (req, res) => {
-  const { priceId, tierIndex, user } = req.body;
+  const { priceId, tierIndex, userId } = req.body;
+  console.log("userId in back chek sesh:", userId, "tierIndex:", tierIndex);
   console.log("priceId in back", priceId);
   const session = await stripe.checkout.sessions.create({
+    payment_intent_data: {
+      metadata: {
+        userId: userId.toString(),
+        tierIndex: tierIndex.toString(),
+      },
+    },
     line_items: [
       {
         price: priceId,
@@ -61,10 +90,7 @@ router.post("/create-checkout-session", async (req, res) => {
       },
     ],
     mode: "payment",
-    metadata: {
-      user,
-      tierIndex,
-    },
+
     success_url: `http://localhost:5173/success?tierIndex=${tierIndex}`, // pass tierIndex in the success_url
     cancel_url: `http://localhost:5173/purchase`,
   });
@@ -154,11 +180,20 @@ const verify = (req, _, buf, encoding) => {
 //   }
 // );
 
-router.use("/webhook", (req, res) => {
+router.use("/webhook", async (req, res) => {
   const event = req.body;
   switch (event.type) {
     case "payment_intent.succeeded": {
       console.log("payment successful");
+      const paymentIntent = event.data.object;
+      console.log("paymentIntent.metadata:", paymentIntent.metadata);
+      const userId = parseInt(paymentIntent.metadata.userId);
+      const tierIndex = parseInt(paymentIntent.metadata.tierIndex);
+
+      console.log("user id, tier index in hook", userId, tierIndex);
+      const tier = tiers[tierIndex];
+      updateUserCredits(userId, tier.credits);
+
       break;
     }
 
@@ -167,5 +202,21 @@ router.use("/webhook", (req, res) => {
   }
   res.json({ received: true });
 });
+
+async function updateUserCredits(userId, creditsToAdd) {
+  const user = await prisma.users.findUnique({ where: { id: userId } });
+
+  if (!user) {
+    console.error(`User not found with ID ${userId}`);
+    return;
+  }
+
+  const updatedUser = await prisma.users.update({
+    where: { id: userId },
+    data: { credits: user.credits + creditsToAdd },
+  });
+
+  console.log("User credits updated:", updatedUser);
+}
 
 module.exports = router;
