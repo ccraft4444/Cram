@@ -1,3 +1,5 @@
+/* global process */
+
 import axios from "axios";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
@@ -6,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { OpenAI } from "langchain/llms/openai";
 import { PromptTemplate } from "langchain/prompts";
 import { LLMChain } from "langchain/chains";
-
-// const { OpenAI } = require("langchain/llms/openai");
 
 // const model = new OpenAI({ temperature: 0.9 });
 // const template = "Return flashcard set... {studyGuide}?";
@@ -19,7 +19,7 @@ import { LLMChain } from "langchain/chains";
 // const model1 = new OpenAI({ temperature: 0.9 });
 // const template1 = "Return test prediction... {studyGuide}?";
 // const prompt1 = new PromptTemplate({
-//   template: template,
+//   template: template1,
 //   inputVariables: ["studyGuide"],
 // });
 
@@ -47,14 +47,29 @@ export default function FileUploader() {
   // const generateResponse = async () => {
   //   const res = await chain.call({ studyGuide: text });
   //   console.log(res);
-  // return res
+  //   return res;
   // };
 
   // const generateResponse1 = async () => {
   //   const res = await chain1.call({ studyGuide: text });
   //   console.log(res);
-  // return res
+  //   return res;
   // };
+
+  async function genFlash() {
+    const flashCards = await axios.post("/routes/langChain/flashcard", {
+      studyGuide: text,
+    });
+    setResponse(flashCards);
+  }
+
+  async function genPrediction() {
+    const prediction = await axios.post("/routes/langChain/prediction", {
+      studyGuide: text,
+    });
+    console.log("prediction", prediction);
+    setResponse(prediction);
+  }
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -105,7 +120,8 @@ export default function FileUploader() {
                     credits: newTotalCredits,
                   });
                   setUser({ ...selectedUser, credits: newCredits });
-                  setResponse(generateResponse());
+
+                  genFlash();
                 } else {
                   setTimeout(() => {
                     navigate("/purchase");
@@ -123,7 +139,7 @@ export default function FileUploader() {
                     credits: newTotalCredits,
                   });
                   setUser({ ...selectedUser, credits: newCredits });
-                  setResponse(generateResponse1());
+                  genPrediction();
                 } else {
                   setTimeout(() => {
                     navigate("/purchase");
