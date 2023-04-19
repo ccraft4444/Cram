@@ -42,14 +42,14 @@ const generateResponse1 = async (text) => {
 
 router.post("/flashcard", async (req, res) => {
   const { studyGuide } = req.body;
-  const response = generateResponse(studyGuide);
-  res.send(response);
+  // const response = generateResponse(studyGuide);
+  res.send("i pooped my pants");
 });
 
 router.post("/prediction", async (req, res) => {
   const { studyGuide } = req.body;
-  const response = generateResponse1(studyGuide);
-  res.send(response);
+  // const response = generateResponse1(studyGuide);
+  res.send("i pooped my pants");
 });
 
 module.exports = router;

@@ -5,28 +5,9 @@ import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { OpenAI } from "langchain/llms/openai";
-import { PromptTemplate } from "langchain/prompts";
-import { LLMChain } from "langchain/chains";
+import Loading from "./Loading";
 
-// const model = new OpenAI({ temperature: 0.9 });
-// const template = "Return flashcard set... {studyGuide}?";
-// const prompt = new PromptTemplate({
-//   template: template,
-//   inputVariables: ["studyGuide"],
-// });
-
-// const model1 = new OpenAI({ temperature: 0.9 });
-// const template1 = "Return test prediction... {studyGuide}?";
-// const prompt1 = new PromptTemplate({
-//   template: template1,
-//   inputVariables: ["studyGuide"],
-// });
-
-// const chain = new LLMChain({ llm: model, prompt: prompt });
-// const chain1 = new LLMChain({ llm: model1, prompt: prompt1 });
-
-export default function FileUploader() {
+export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
   const { fetchMe, updateCredits, selectedUser, setUser } = useAuth();
   const [selectedFile, setSelectedFile] = useState(null);
   const [text, setText] = useState("");
@@ -43,18 +24,6 @@ export default function FileUploader() {
   const handleFileInputChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
-
-  // const generateResponse = async () => {
-  //   const res = await chain.call({ studyGuide: text });
-  //   console.log(res);
-  //   return res;
-  // };
-
-  // const generateResponse1 = async () => {
-  //   const res = await chain1.call({ studyGuide: text });
-  //   console.log(res);
-  //   return res;
-  // };
 
   async function genFlash() {
     const flashCards = await axios.post("/routes/langChain/flashcard", {
@@ -120,8 +89,11 @@ export default function FileUploader() {
                     credits: newTotalCredits,
                   });
                   setUser({ ...selectedUser, credits: newCredits });
-
-                  genFlash();
+                  onStudyGuideChange(text);
+                  onRouteChange("flashcard");
+                  setTimeout(() => {
+                    navigate("/loading");
+                  }, 0);
                 } else {
                   setTimeout(() => {
                     navigate("/purchase");
@@ -139,7 +111,11 @@ export default function FileUploader() {
                     credits: newTotalCredits,
                   });
                   setUser({ ...selectedUser, credits: newCredits });
-                  genPrediction();
+                  onStudyGuideChange(text);
+                  onRouteChange("prediction");
+                  setTimeout(() => {
+                    navigate("/loading");
+                  }, 0);
                 } else {
                   setTimeout(() => {
                     navigate("/purchase");

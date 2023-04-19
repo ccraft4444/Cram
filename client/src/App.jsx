@@ -12,8 +12,26 @@ import FileUploader from "./Components/FileUpload";
 import Cancel from "./Components/Cancel";
 import Success from "./Components/Success";
 import StripeTest from "./Components/StripeCheckoutTest";
+import Loading from "./Components/Loading";
+import Response from "./Components/Response";
+import { useState } from "react";
 
 function App() {
+  const [studyGuide, setStudyGuide] = useState("Your study guide text here");
+  const [route, setRoute] = useState("flashcard");
+  const [response, setResponse] = useState("");
+
+  const handleStudyGuideChange = (newStudyGuide) => {
+    setStudyGuide(newStudyGuide);
+  };
+
+  const handleRouteChange = (newRoute) => {
+    setRoute(newRoute);
+  };
+
+  const handleResponseChange = (newResponse) => {
+    setResponse(newResponse);
+  };
   return (
     <div className="App bg-stone-100">
       <Navbar />
@@ -24,10 +42,29 @@ function App() {
         {/* <Route path="/" element={<StripePayment />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route
+          path="/loading"
+          element={
+            <Loading
+              onResponseChange={handleResponseChange}
+              studyGuide={studyGuide}
+              route={route}
+            />
+          }
+        />
         <Route path="/purchase" element={<Purchase />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/fileUpload" element={<FileUploader />} />
+        <Route
+          path="/fileUpload"
+          element={
+            <FileUploader
+              onStudyGuideChange={handleStudyGuideChange}
+              onRouteChange={handleRouteChange}
+            />
+          }
+        />
+        <Route path="/response" element={<Response response={response} />} />
       </Routes>
     </div>
   );
