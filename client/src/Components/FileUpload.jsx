@@ -79,8 +79,13 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
       <form onSubmit={handleFormSubmit}>
         <input type="file" onChange={handleFileInputChange} />
         <button type="submit">Upload</button>
+        <div>
+          <div>{selectedUser.email}</div>
+          <div>Credits: {selectedUser.credits}</div>
+        </div>
         {fileUploaded ? (
           <>
+            <>Tools</>
             <button
               onClick={async () => {
                 if (selectedUser.credits > 1) {
@@ -101,7 +106,7 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
                 }
               }}
             >
-              Generate Flashcards
+              Generate Flashcards *logo* 1
             </button>
             <button
               onClick={async () => {
@@ -123,12 +128,13 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
                 }
               }}
             >
-              Generate Test Prediction
+              Generate Test Prediction *logo* 2
             </button>
           </>
         ) : null}
       </form>
       <textarea value={response} readOnly></textarea>
+
       <button onClick={() => navigate("/purchase")}>Purchase Credits</button>
     </div>
   );
