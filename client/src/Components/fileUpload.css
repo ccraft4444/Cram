@@ -1,0 +1,22 @@
+.primaryContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.secondaryContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  width: 600px;
+  height: 188px;
+  left: 768px;
+  top: 132px;
+
+  background: #1c1c1e;
+  border-radius: 30px;
+}

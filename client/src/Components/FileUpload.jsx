@@ -5,7 +5,7 @@ import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Loading from "./Loading";
+import "./fileUpload.css";
 
 export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
   const { fetchMe, updateCredits, selectedUser, setUser } = useAuth();
@@ -13,6 +13,7 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
   const [text, setText] = useState("");
   const [response, setResponse] = useState("");
   const [fileUploaded, setFileUploaded] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -76,19 +77,22 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
 
   return (
     <div>
-      <form onSubmit={handleFormSubmit}>
-        <input type="file" onChange={handleFileInputChange} />
-        <button type="submit">Upload</button>
-        <div>
-          <div>{selectedUser.email}</div>
-          <div>Credits: {selectedUser.credits}</div>
-        </div>
-        {fileUploaded ? (
-          <>
+      <div className="primaryContainer">
+        <form onSubmit={handleFormSubmit}>
+          <input type="file" onChange={handleFileInputChange} />
+          <button type="submit">Upload</button>
+
+          <div className="secondaryContainer">
+            <div className="userInfo">
+              <div>{selectedUser.email}</div>
+              <div>Credits: {selectedUser.credits}</div>
+            </div>
             <>Tools</>
             <button
               onClick={async () => {
-                if (selectedUser.credits > 1) {
+                if (!fileUploaded) {
+                  setError("No file uploaded");
+                } else if (selectedUser.credits > 1) {
                   const newTotalCredits = selectedUser.credits - 1;
                   const newCredits = await updateCredits({
                     credits: newTotalCredits,
@@ -110,7 +114,9 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
             </button>
             <button
               onClick={async () => {
-                if (selectedUser.credits > 2) {
+                if (!fileUploaded) {
+                  setError("No file uploaded");
+                } else if (selectedUser.credits > 2) {
                   const newTotalCredits = selectedUser.credits - 2;
                   const newCredits = await updateCredits({
                     credits: newTotalCredits,
@@ -130,12 +136,12 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
             >
               Generate Test Prediction *logo* 2
             </button>
-          </>
-        ) : null}
-      </form>
-      <textarea value={response} readOnly></textarea>
-
-      <button onClick={() => navigate("/purchase")}>Purchase Credits</button>
+            <button onClick={() => navigate("/purchase")}>
+              Purchase Credits
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
