@@ -10,13 +10,120 @@
 
 .userInfo {
   display: flex;
-  flex-direction: row;
-  position: absolute;
+  flex-direction: column;
+  position: relative;
   width: 600px;
   height: 188px;
-  left: 768px;
-  top: 132px;
-
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
   background: #1c1c1e;
   border-radius: 30px;
+}
+
+.userInfoText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  text-align: center;
+}
+
+.uploadForm {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 407px;
+  height: 621px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  background: #d9d9d9;
+  border: 1px dashed #7f9fff;
+  border-radius: 43px;
+}
+
+.uploadBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.uploadIcon {
+  background: url("path/to/upload-icon.png") no-repeat center;
+  background-size: contain;
+  width: 128px;
+  height: 128px;
+  margin-bottom: 10px;
+}
+
+.uploadText {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.tools {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 600px;
+  height: 353px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  background: #1c1c1e;
+  border-radius: 30px;
+}
+
+.toolsTitle {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.toolsButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.button {
+  display: block;
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 3px;
+  background-color: #f0f0f0;
+  color: #1c1c1e;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.button:hover {
+  box-shadow: 0 0 10px rgba(154, 46, 46, 0.5);
+}
+
+@media (max-width: 768px) {
+  .primaryContainer {
+    flex-direction: column;
+  }
+  .userInfo,
+  .uploadForm,
+  .tools {
+    width: 80%;
+  }
 }

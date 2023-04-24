@@ -1,5 +1,3 @@
-/* global process */
-
 import axios from "axios";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
@@ -78,17 +76,21 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
   return (
     <div>
       <div className="primaryContainer">
-        <form onSubmit={handleFormSubmit}>
-          <input type="file" onChange={handleFileInputChange} />
-          <button type="submit">Upload</button>
-
-          <div className="secondaryContainer">
-            <div className="userInfo">
-              <div>{selectedUser.email}</div>
-              <div>Credits: {selectedUser.credits}</div>
-            </div>
+        <div className="uploadForm">
+          <form onSubmit={handleFormSubmit}>
+            <input type="file" onChange={handleFileInputChange} />
+            <button type="submit">Upload</button>
+          </form>
+        </div>
+        <div className="secondaryContainer">
+          <div className="userInfo">
+            <div>{selectedUser.email}</div>
+            <div>Credits: {selectedUser.credits}</div>
+          </div>
+          <div className="tools">
             <>Tools</>
             <button
+              className="button"
               onClick={async () => {
                 if (!fileUploaded) {
                   setError("No file uploaded");
@@ -113,6 +115,7 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
               Generate Flashcards *logo* 1
             </button>
             <button
+              className="button"
               onClick={async () => {
                 if (!fileUploaded) {
                   setError("No file uploaded");
@@ -136,11 +139,11 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
             >
               Generate Test Prediction *logo* 2
             </button>
-            <button onClick={() => navigate("/purchase")}>
+            <button className="button" onClick={() => navigate("/purchase")}>
               Purchase Credits
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

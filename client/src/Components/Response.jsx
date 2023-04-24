@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Response({ response }) {
+  const navigate = useNavigate();
   return (
     <>
       <h1>Here are your study tools</h1>
       <p>{response}</p>
+      <button onClick={() => navigate("/fileupload")}>Create More Tools</button>
 
       <h1>Upload to quizlet</h1>
       <ls>
