@@ -15,14 +15,21 @@ import Success from "./Components/Success";
 import Loading from "./Components/Loading";
 import Response from "./Components/Response";
 import { useState } from "react";
+import Tools from "./Components/Tools";
+import { useNavigate } from "react-router-dom";
 
 function App() {
-  const [studyGuide, setStudyGuide] = useState("Your study guide text here");
+  const [studyGuide, setStudyGuide] = useState("");
   const [route, setRoute] = useState("flashcard");
   const [response, setResponse] = useState("");
+  const navigate = useNavigate();
 
-  const handleStudyGuideChange = (newStudyGuide) => {
+  const handleStudyGuideChange = (newStudyGuide, callback) => {
     setStudyGuide(newStudyGuide);
+    setTimeout(() => {
+      navigate("/tools");
+    }, 1000);
+    console.log("study guide app", studyGuide);
   };
 
   const handleRouteChange = (newRoute) => {
@@ -41,6 +48,14 @@ function App() {
         {/* <Route path="/" element={<StripePayment />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+
+        <Route
+          path="/tools"
+          element={
+            <Tools studyGuide={studyGuide} onRouteChange={handleRouteChange} />
+          }
+        />
+
         <Route
           path="/loading"
           element={

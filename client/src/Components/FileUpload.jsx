@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./fileUpload.css";
+import { Link } from "react-router-dom";
 
 export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
   const { fetchMe, updateCredits, selectedUser, setUser } = useAuth();
@@ -64,8 +65,18 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
         return response.text();
       })
       .then((extractedText) => {
-        setText(extractedText.trim());
-        setFileUploaded(true);
+        console.log("extracted text", extractedText);
+        const trimmedText = extractedText.trim();
+        setText(extractedText);
+        // setFileUploaded(true);
+        console.log("text", text);
+        onStudyGuideChange(trimmedText, () => {
+          navigate("/tools");
+        });
+        // onStudyGuideChange(trimmedText);
+        // setTimeout(() => {
+        //   navigate("/tools");
+        // }, 0);
       })
       .catch((error) => {
         console.error(error);
@@ -77,72 +88,13 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
     <div>
       <div className="primaryContainer">
         <div className="uploadForm">
+          <Link to="/fileupload">Upload</Link>
+          <Link to="/tools">Tools</Link>
+
           <form onSubmit={handleFormSubmit}>
             <input type="file" onChange={handleFileInputChange} />
             <button type="submit">Upload</button>
           </form>
-        </div>
-        <div className="secondaryContainer">
-          <div className="userInfo">
-            <div>{selectedUser.email}</div>
-            <div>Credits: {selectedUser.credits}</div>
-          </div>
-          <div className="tools">
-            <>Tools</>
-            <button
-              className="button"
-              onClick={async () => {
-                if (!fileUploaded) {
-                  setError("No file uploaded");
-                } else if (selectedUser.credits > 1) {
-                  const newTotalCredits = selectedUser.credits - 1;
-                  const newCredits = await updateCredits({
-                    credits: newTotalCredits,
-                  });
-                  setUser({ ...selectedUser, credits: newCredits });
-                  onStudyGuideChange(text);
-                  onRouteChange("flashcard");
-                  setTimeout(() => {
-                    navigate("/loading");
-                  }, 0);
-                } else {
-                  setTimeout(() => {
-                    navigate("/purchase");
-                  }, 0);
-                }
-              }}
-            >
-              Generate Flashcards *logo* 1
-            </button>
-            <button
-              className="button"
-              onClick={async () => {
-                if (!fileUploaded) {
-                  setError("No file uploaded");
-                } else if (selectedUser.credits > 2) {
-                  const newTotalCredits = selectedUser.credits - 2;
-                  const newCredits = await updateCredits({
-                    credits: newTotalCredits,
-                  });
-                  setUser({ ...selectedUser, credits: newCredits });
-                  onStudyGuideChange(text);
-                  onRouteChange("prediction");
-                  setTimeout(() => {
-                    navigate("/loading");
-                  }, 0);
-                } else {
-                  setTimeout(() => {
-                    navigate("/purchase");
-                  }, 0);
-                }
-              }}
-            >
-              Generate Test Prediction *logo* 2
-            </button>
-            <button className="button" onClick={() => navigate("/purchase")}>
-              Purchase Credits
-            </button>
-          </div>
         </div>
       </div>
     </div>

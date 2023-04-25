@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function Loading({ onResponseChange, studyGuide, route }) {
   const navigate = useNavigate();
   useEffect(() => {
+    console.log("sg in loading", studyGuide);
     async function fetchData() {
       const result = await axios.post(`/routes/langChain/${route}`, {
         studyGuide,

@@ -1,8 +1,20 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .signup-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  max-width: 400px; /* adjust as needed */
+  width: 100%; /* make sure the box fills the container */
 }
 
 .signup-form h2 {
@@ -38,6 +50,9 @@
 }
 
 .signup-form button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
   background-color: #8c4bff;
   color: #fff;
   font-size: 20px;
@@ -65,4 +80,17 @@
   color: #7232ff;
   border-bottom-color: #7232ff;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.signup-form .login-link {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.signup-form button[type="submit"] {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 200px;
 }
