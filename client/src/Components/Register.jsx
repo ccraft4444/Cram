@@ -1,17 +1,19 @@
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import "./register.css";
 
 export default function Register() {
   const { createUser, fetchMe } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [password1, setPassword1] = useState("");
   const navigate = useNavigate();
 
   return (
-    <div className="w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-1">
-      <h4 class="flex justify-center m-8">Register User</h4>
+    <div className="signup-form">
+      <h4>Sign up</h4>
       {error ? (
         <>
           <h3>{error}</h3>
@@ -21,7 +23,11 @@ export default function Register() {
         onSubmit={async (e) => {
           e.preventDefault();
           try {
-            await createUser({ email, password });
+            if (password == password1) {
+              await createUser({ email, password });
+            } else {
+              setError("Passwords must match");
+            }
           } catch (error) {
             setError("Username is taken");
             setEmail("");
@@ -29,10 +35,9 @@ export default function Register() {
           }
         }}
       >
-        <div class="flex flex-wrap -mx-3 mb-6 ">
-          <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div>
+          <div>
             <input
-              class="w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
               for="grid-first-name"
               placeholder="Email"
               type="text"
@@ -40,9 +45,8 @@ export default function Register() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div class="w-full md:w-1/2 px-3">
+          <div>
             <input
-              class="w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4"
               for="grid-last-name"
               placeholder="Password"
               type="password"
@@ -50,15 +54,19 @@ export default function Register() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          <div>
+            <input
+              for="grid-last-name"
+              placeholder="Password"
+              type="password"
+              value={password1}
+              onChange={(e) => setPassword1(e.target.value)}
+            />
+          </div>
         </div>
 
-        <div className="flex items-center mt-3 justify-center">
-          <button
-            class="bg-gray-600 hover:bg-bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Submit
-          </button>
+        <div>
+          <button type="submit">Submit</button>
         </div>
       </form>
     </div>

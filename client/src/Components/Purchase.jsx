@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import "./purchase.css";
 import axios from "axios"; // Import axios for API requests
 
 export default function Purchase() {
@@ -114,29 +115,29 @@ export default function Purchase() {
 
   return (
     <div>
-      <h2>Select a credit package:</h2>
-      {tiers.map((tier, index) => (
-        <div
-          key={index}
-          onClick={() => handleTierSelection(index)}
-          style={{
-            backgroundColor: index === selectedTier ? "#ccc" : "#fff",
-            padding: 10,
-            borderRadius: 5,
-            cursor: "pointer",
-          }}
-        >
-          <h3>{tier.name}</h3>
-          <p>{tier.credits} credits</p>
-          <p>${tier.price}</p>
-        </div>
-      ))}
+      <h2>Purchase Credits</h2>
+      <div className="credit-package-container">
+        {tiers.map((tier, index) => (
+          <div
+            key={index}
+            onClick={() => handleTierSelection(index)}
+            className={`credit-package ${
+              index === selectedTier ? "selected" : ""
+            }`}
+          >
+            <h3>{tier.name}</h3>
+            <p>{tier.credits} credits</p>
+            <p>${tier.price}</p>
+          </div>
+        ))}
+      </div>
       {selectedTier !== null && (
         <button
           onClick={() => {
             onCheckout(tiers[selectedTier]);
             // navigate("/upload");
           }}
+          className="purchase-button"
         >
           Purchase
         </button>

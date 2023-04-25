@@ -1,0 +1,68 @@
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.signup-form h2 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.signup-form label {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.signup-form input[type="text"]:focus,
+.signup-form input[type="email"]:focus,
+.signup-form input[type="password"]:focus {
+  border-bottom-color: #8c4bff;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.signup-form button[type="submit"] {
+  background-color: #8c4bff;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.signup-form button[type="submit"]:hover {
+  background-color: #7232ff;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.signup-form a {
+  color: #8c4bff;
+  text-decoration: none;
+  border-bottom: 2px solid #8c4bff;
+  transition: all 0.3s ease-in-out;
+}
+
+.signup-form a:hover {
+  color: #7232ff;
+  border-bottom-color: #7232ff;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}

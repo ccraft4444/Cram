@@ -1,0 +1,33 @@
+.credit-package-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.credit-package {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.credit-package:hover {
+  background-color: #eee;
+}
+
+.credit-package.selected {
+  background-color: #ccc;
+}
+
+.purchase-button {
+  display: block;
+  margin: 20px auto 0;
+}
