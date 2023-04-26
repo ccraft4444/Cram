@@ -51,14 +51,23 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
   }
 
   return (
-    <div className="tools">
-      <div className="links">
-        <Link to="/fileupload">Upload</Link>
-        <Link to="/tools">Tools</Link>
-      </div>
-      <div>Flashcards</div>
-      <input type="checkbox" checked={isChecked} onChange={handleChange} />
-      {/* <button
+    <div className="big">
+      <div className="tools">
+        <div className="links">
+          <Link to="/fileupload">Upload</Link>
+          <Link to="/tools">Tools</Link>
+        </div>
+
+        <div className="row">
+          <div>Credit Balance: {selectedUser.credits}</div>
+        </div>
+
+        <div className="row">
+          <div>Flashcards</div>
+          <input type="checkbox" checked={isChecked} onChange={handleChange} />
+        </div>
+
+        {/* <button
         className="button"
         onClick={async () => {
           if (!text) {
@@ -82,66 +91,46 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
       >
         Generate Flashcards *logo* 1
       </button> */}
-      <div>Test Prediction 2</div>
-      <input type="checkbox" checked={isChecked2} onChange={handleChange2} />
+        <div className="row">
+          <div>Test Prediction 2</div>
+          <input
+            type="checkbox"
+            checked={isChecked2}
+            onChange={handleChange2}
+          />
+        </div>
 
-      {(isChecked == true || isChecked2 == true) &&
-      selectedUser.credits > totalPrice ? (
-        <button
-          className="button"
-          onClick={async () => {
-            const newTotalCredits = selectedUser.credits - totalPrice;
-            const newCredits = await updateCredits({
-              credits: newTotalCredits,
-            });
-            setUser({ ...selectedUser, credits: newCredits });
-            if (isChecked == true && isChecked2 == true) {
-              onRouteChange("both");
-            } else if (isChecked == falase && isChecked2 == true) {
-              onRouteChange("prediction");
-            } else {
-              onRouteChange("flashcard");
-            }
+        {(isChecked == true || isChecked2 == true) &&
+        selectedUser.credits > totalPrice ? (
+          <button
+            className="button"
+            onClick={async () => {
+              const newTotalCredits = selectedUser.credits - totalPrice;
+              const newCredits = await updateCredits({
+                credits: newTotalCredits,
+              });
+              setUser({ ...selectedUser, credits: newCredits });
+              if (isChecked == true && isChecked2 == true) {
+                onRouteChange("both");
+              } else if (isChecked == falase && isChecked2 == true) {
+                onRouteChange("prediction");
+              } else {
+                onRouteChange("flashcard");
+              }
 
-            setTimeout(() => {
-              navigate("/loading");
-            }, 0);
-          }}
-        >
-          Start Cramming
-        </button>
-      ) : (
-        <button className="button" onClick={() => navigate("/purchase")}>
-          Purchase Credits
-        </button>
-      )}
-
-      {/* <button
-        className="button"
-        onClick={async () => {
-          if (!text) {
-            setError("No file uploaded");
-            console.log(error);
-          } else if (selectedUser.credits > 2) {
-            const newTotalCredits = selectedUser.credits - 2;
-            const newCredits = await updateCredits({
-              credits: newTotalCredits,
-            });
-            setUser({ ...selectedUser, credits: newCredits });
-            onRouteChange("prediction");
-
-            setTimeout(() => {
-              navigate("/loading");
-            }, 0);
-          } else {
-            setTimeout(() => {
-              navigate("/purchase");
-            }, 0);
-          }
-        }}
-      >
-        Generate Test Prediction *logo* 2
-      </button> */}
+              setTimeout(() => {
+                navigate("/loading");
+              }, 0);
+            }}
+          >
+            Start Cramming
+          </button>
+        ) : (
+          <button className="button" onClick={() => navigate("/purchase")}>
+            Purchase Credits
+          </button>
+        )}
+      </div>
     </div>
   );
 }

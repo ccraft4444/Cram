@@ -1,3 +1,8 @@
+.big {
+  display: flex;
+  justify-content: center;
+}
+
 .tools {
   display: flex;
   flex-direction: column;
@@ -7,6 +12,7 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  width: 60%;
 }
 
 .links {
@@ -32,13 +38,31 @@
   padding: 10px 20px;
   border-radius: 5px;
   border: none;
-  background-color: #f2f2f2;
-  color: #333;
+  background-color: #7c31d1;
+  color: #ffffff;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
+  width: 504px;
+  height: 81px;
+  left: 100px;
+  top: 535px;
 }
 
 .tools .button:hover {
   background-color: #e6e6e6;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #e9e9e9;
+  border-radius: 19px;
+  width: 504px;
+  height: 70px;
+  left: 100px;
+  top: 249px;
+  margin-bottom: 10px;
 }
