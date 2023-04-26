@@ -17,12 +17,18 @@ import Response from "./Components/Response";
 import { useState } from "react";
 import Tools from "./Components/Tools";
 import { useNavigate } from "react-router-dom";
+import Total from "./Total";
 
 function App() {
   const [studyGuide, setStudyGuide] = useState("");
   const [route, setRoute] = useState("flashcard");
   const [response, setResponse] = useState("");
+  const [total, setTotal] = useState();
   const navigate = useNavigate();
+
+  const handleTotalChange = (newTotal) => {
+    setTotal(newTotal);
+  };
 
   const handleStudyGuideChange = (newStudyGuide, callback) => {
     setStudyGuide(newStudyGuide);
@@ -52,10 +58,14 @@ function App() {
         <Route
           path="/tools"
           element={
-            <Tools studyGuide={studyGuide} onRouteChange={handleRouteChange} />
+            <Tools
+              studyGuide={studyGuide}
+              onRouteChange={handleRouteChange}
+              onTotalChange={handleTotalChange}
+            />
           }
         />
-
+        <Route path="/total" element={<Total total={total} />} />
         <Route
           path="/loading"
           element={

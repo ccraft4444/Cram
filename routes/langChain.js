@@ -52,4 +52,12 @@ router.post("/prediction", async (req, res) => {
   res.send("i pooped my pants");
 });
 
+router.post("/both", async (req, res) => {
+  const { studyGuide } = req.body;
+  // const response = generateResponse(studyGuide)
+  // const response2 = generateResponse1(studyGuide);
+
+  res.send("i pooped my pants");
+});
+
 module.exports = router;
