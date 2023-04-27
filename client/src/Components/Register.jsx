@@ -14,6 +14,7 @@ export default function Register() {
   return (
     <div className="signup-form">
       <h4>Sign up</h4>
+      <hr />
       {error ? (
         <>
           <h3>{error}</h3>

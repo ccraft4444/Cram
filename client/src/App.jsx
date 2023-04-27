@@ -30,6 +30,8 @@ function App() {
     setTotal(newTotal);
   };
 
+  // await setStudyGuide potentially
+
   const handleStudyGuideChange = (newStudyGuide) => {
     setStudyGuide(newStudyGuide);
     setTimeout(() => {

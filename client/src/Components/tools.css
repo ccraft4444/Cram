@@ -36,7 +36,7 @@
 .tools .button {
   margin-top: 20px;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 15px;
   border: none;
   background-color: #7c31d1;
   color: #ffffff;
@@ -47,6 +47,15 @@
   height: 81px;
   left: 100px;
   top: 535px;
+
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 42px;
+  /* identical to box height */
+
+  text-align: center;
 }
 
 .tools .button:hover {
@@ -65,4 +74,30 @@
   left: 100px;
   top: 249px;
   margin-bottom: 10px;
+}
+
+.text {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 42px;
+}
+
+.text1 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 36px;
+  text-align: center;
+}
+
+.box {
+  background: #e9e9e9;
+  border: 2px solid #777777;
+  border-radius: 9px;
+
+  width: 40px;
+  height: 40px;
 }

@@ -89,8 +89,12 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
       <div className="primaryContainer">
         <div className="uploadForm">
           <div className="links">
-            <Link to="/fileupload">Upload</Link>
-            <Link to="/tools">Tools</Link>
+            <Link to="/fileupload" className="text">
+              Upload
+            </Link>
+            <Link to="/tools" className="text">
+              Tools
+            </Link>
           </div>
 
           <form onSubmit={handleFormSubmit}>

@@ -1,14 +1,22 @@
 import { useNavigate } from "react-router-dom";
+import "./response.css";
 
 export default function Response({ response }) {
   const navigate = useNavigate();
   return (
-    <>
-      <h1>Here are your study tools</h1>
-      <p>{response}</p>
-      <button onClick={() => navigate("/fileupload")}>Create More Tools</button>
+    <div className="contain">
+      <h1 className="textington">Your study tools are ready!</h1>
+      <hr />
+      <div className="text3">
+        Copy your tools from the textbox below and follow the instructions to
+        upload the tools to Quizlet.
+      </div>
+      <div className="text3">Good luck on your test!</div>
 
-      <h1>Upload to quizlet</h1>
+      <p>{response}</p>
+
+      <h1 className="quiz">Upload to quizlet</h1>
+      <hr />
       <ls>
         <li>Copy your study tools</li>
         <li>
@@ -26,6 +34,9 @@ export default function Response({ response }) {
         <li>Click the Comma button bellow your data</li>
         <li>Click the import button</li>
       </ls>
-    </>
+      <button className="butt" onClick={() => navigate("/fileupload")}>
+        Create More Tools
+      </button>
+    </div>
   );
 }

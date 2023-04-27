@@ -15,7 +15,8 @@ export default function Login() {
   return (
     <div className="form-container">
       <div className="signup-form">
-        <h4>Login to get started</h4>
+        <h4>Login</h4>
+        <hr />
         <form
           onSubmit={async (e) => {
             e.preventDefault();
@@ -58,10 +59,9 @@ export default function Login() {
           <div>
             <button type="submit">Login</button>
           </div>
-          <a>
-            Don't have an account? <Link to="/register">Sign up</Link>{" "}
-          </a>
         </form>
+        <a className="texs">Don't have an account? </a>
+        <Link to="/register">Sign up</Link>
       </div>
     </div>
   );

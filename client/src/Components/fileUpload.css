@@ -66,6 +66,16 @@
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
+  width: 100%;
+
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 42px;
+  /* identical to box height */
+
+  text-align: center;
 }
 
 .uploadForm form button[type="submit"]:hover {
