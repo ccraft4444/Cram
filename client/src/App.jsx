@@ -30,7 +30,7 @@ function App() {
     setTotal(newTotal);
   };
 
-  const handleStudyGuideChange = (newStudyGuide, callback) => {
+  const handleStudyGuideChange = (newStudyGuide) => {
     setStudyGuide(newStudyGuide);
     setTimeout(() => {
       navigate("/tools");

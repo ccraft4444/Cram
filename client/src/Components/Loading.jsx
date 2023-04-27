@@ -27,10 +27,14 @@ export default function Loading({ onResponseChange, studyGuide, route }) {
   return (
     <>
       <h1>Cramming in progress</h1>
+
+      <div className="row"></div>
+
       <p>
         Sit tight while our systems analyze your documents and build your custom
         tools
       </p>
+      <p>Join Discord for Support</p>
     </>
   );
 }

@@ -1,33 +1,59 @@
-.credit-package-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.credit-package {
-  width: 150px;
-  height: 150px;
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  margin: 5px;
+  align-items: center;
+  width: 60%;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.credit-package-container {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.credit-package {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  width: 15%;
 }
 
-.credit-package:hover {
-  background-color: #eee;
-}
-
-.credit-package.selected {
-  background-color: #ccc;
+.selected {
+  border: 1px solid purple;
 }
 
 .purchase-button {
-  display: block;
-  margin: 20px auto 0;
+  background-color: purple;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-top: 16px;
+  cursor: pointer;
+  width: 45%;
+  height: 15;
+}
+
+h2 {
+  text-decoration: underline purple;
+}
+
+.discord {
+  margin-top: 16px;
+  font-size: 12px;
+  color: gray;
+}
+
+.rowz {
+  display: flex;
+  flex-direction: row;
 }
