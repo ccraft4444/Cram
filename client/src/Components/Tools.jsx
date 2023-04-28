@@ -54,10 +54,10 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
     <div className="big">
       <div className="tools">
         <div className="links">
-          <Link to="/fileupload" className="text1">
+          <Link to="/fileupload" className="text10">
             Upload
           </Link>
-          <Link to="/tools" className="text1">
+          <Link to="/tools" className="text">
             Tools
           </Link>
         </div>
@@ -65,6 +65,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
         <div className="row">
           {" "}
           <svg
+            className="first"
             width="30"
             height="22"
             viewBox="0 0 30 22"
@@ -82,6 +83,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
         <div className="row">
           {" "}
           <svg
+            className="first"
             width="26"
             height="22"
             viewBox="0 0 26 22"
@@ -93,7 +95,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
               fill="#7855FF"
             />
           </svg>
-          <div className="text">Flashcards</div>
+          <div className="textF">Flashcards</div>
           <svg
             width="30"
             height="23"
@@ -107,7 +109,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
             />
           </svg>
           <div>|</div>
-          <div>1</div>
+          <div className="numb">1</div>
           <input
             type="checkbox"
             className="box"
@@ -142,6 +144,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
       </button> */}
         <div className="row">
           <svg
+            className="first"
             width="24"
             height="29"
             viewBox="0 0 24 29"
@@ -154,7 +157,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
             />
           </svg>
 
-          <div className="text">Test Prediction </div>
+          <div className="textP">Test Prediction </div>
           <svg
             width="30"
             height="23"
@@ -168,7 +171,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
             />
           </svg>
           <div>|</div>
-          <div>2</div>
+          <div className="numb">2</div>
           <input
             className="box"
             type="checkbox"
@@ -189,7 +192,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
               setUser({ ...selectedUser, credits: newCredits });
               if (isChecked == true && isChecked2 == true) {
                 onRouteChange("both");
-              } else if (isChecked == falase && isChecked2 == true) {
+              } else if (isChecked == false && isChecked2 == true) {
                 onRouteChange("prediction");
               } else {
                 onRouteChange("flashcard");

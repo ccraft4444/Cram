@@ -12,64 +12,68 @@ export default function Register() {
   const navigate = useNavigate();
 
   return (
-    <div className="signup-form">
-      <h4>Sign up</h4>
-      <hr />
-      {error ? (
-        <>
-          <h3>{error}</h3>
-        </>
-      ) : null}
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          try {
-            if (password == password1) {
-              await createUser({ email, password });
-            } else {
-              setError("Passwords must match");
+    <div className="form-container">
+      <div className="signup-form">
+        <h4>Sign up</h4>
+        <hr className="loginHr" />
+        {error ? (
+          <>
+            <h3>{error}</h3>
+          </>
+        ) : null}
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            try {
+              if (password == password1) {
+                await createUser({ email, password });
+              } else {
+                setError("Passwords must match");
+              }
+            } catch (error) {
+              setError("Username is taken");
+              setEmail("");
+              setPassword("");
             }
-          } catch (error) {
-            setError("Username is taken");
-            setEmail("");
-            setPassword("");
-          }
-        }}
-      >
-        <div>
+          }}
+        >
           <div>
-            <input
-              for="grid-first-name"
-              placeholder="Email"
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+            <div>
+              <input
+                for="grid-first-name"
+                placeholder="Email"
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                for="grid-last-name"
+                placeholder="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                for="grid-last-name"
+                placeholder="Password"
+                type="password"
+                value={password1}
+                onChange={(e) => setPassword1(e.target.value)}
+              />
+            </div>
           </div>
-          <div>
-            <input
-              for="grid-last-name"
-              placeholder="Password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div>
-            <input
-              for="grid-last-name"
-              placeholder="Password"
-              type="password"
-              value={password1}
-              onChange={(e) => setPassword1(e.target.value)}
-            />
-          </div>
-        </div>
 
-        <div>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+          <div>
+            <button className="login-submit" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

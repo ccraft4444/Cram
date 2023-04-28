@@ -16,7 +16,7 @@ export default function Login() {
     <div className="form-container">
       <div className="signup-form">
         <h4>Login</h4>
-        <hr />
+        <hr className="loginHr" />
         <form
           onSubmit={async (e) => {
             e.preventDefault();
@@ -57,7 +57,9 @@ export default function Login() {
           </div>
 
           <div>
-            <button type="submit">Login</button>
+            <button className="login-submit" type="submit">
+              Login
+            </button>
           </div>
         </form>
         <a className="texs">Don't have an account? </a>

@@ -92,7 +92,7 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
             <Link to="/fileupload" className="text">
               Upload
             </Link>
-            <Link to="/tools" className="text">
+            <Link to="/tools" className="text10">
               Tools
             </Link>
           </div>

@@ -18,6 +18,7 @@ import { useState } from "react";
 import Tools from "./Components/Tools";
 import { useNavigate } from "react-router-dom";
 import Total from "./Total";
+import Box from "./Components/Box";
 
 function App() {
   const [studyGuide, setStudyGuide] = useState("");
@@ -91,6 +92,7 @@ function App() {
           }
         />
         <Route path="/response" element={<Response response={response} />} />
+        <Route path="/box" element={<Box />} />
       </Routes>
     </div>
   );
