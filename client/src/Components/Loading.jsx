@@ -16,7 +16,7 @@ export default function Loading({ onResponseChange, studyGuide, route }) {
       onResponseChange(result.data);
     }
     fetchData();
-    // navTime();
+    navTime();
   }, [studyGuide, route]);
 
   function navTime() {

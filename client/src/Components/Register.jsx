@@ -39,6 +39,7 @@ export default function Register() {
         >
           <div>
             <div>
+              <div className="label">Email</div>
               <input
                 for="grid-first-name"
                 placeholder="Email"
@@ -48,6 +49,7 @@ export default function Register() {
               />
             </div>
             <div>
+              <div className="label">Password</div>
               <input
                 for="grid-last-name"
                 placeholder="Password"
@@ -57,6 +59,7 @@ export default function Register() {
               />
             </div>
             <div>
+              <div className="label">Confirm Password</div>
               <input
                 for="grid-last-name"
                 placeholder="Password"
@@ -69,7 +72,7 @@ export default function Register() {
 
           <div>
             <button className="login-submit" type="submit">
-              Submit
+              Sign Up 🡢
             </button>
           </div>
         </form>

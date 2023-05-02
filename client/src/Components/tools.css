@@ -120,6 +120,14 @@
 
 .numb {
   margin-right: 65px;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 42px;
+  /* identical to box height */
+
+  color: #777777;
 }
 
 /* .text1 {
@@ -154,4 +162,9 @@
 
   width: 40px;
   height: 40px;
+}
+
+.line {
+  padding: 10px;
+  font-size: x-large;
 }

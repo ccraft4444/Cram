@@ -108,7 +108,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
               fill="#777777"
             />
           </svg>
-          <div>|</div>
+          <div className="line">|</div>
           <div className="numb">1</div>
           <input
             type="checkbox"
@@ -170,7 +170,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
               fill="#777777"
             />
           </svg>
-          <div>|</div>
+          <div className="line">|</div>
           <div className="numb">2</div>
           <input
             className="box"

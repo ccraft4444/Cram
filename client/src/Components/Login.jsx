@@ -37,6 +37,7 @@ export default function Login() {
           ) : null}
           <div>
             <div>
+              <div className="label">Username</div>
               <input
                 for="grid-first-name"
                 placeholder="Username"
@@ -46,6 +47,7 @@ export default function Login() {
               />
             </div>
             <div class="w-full md:w-1/2 px-3">
+              <div className="label">Password</div>
               <input
                 for="grid-last-name"
                 placeholder="Password"
@@ -58,11 +60,11 @@ export default function Login() {
 
           <div>
             <button className="login-submit" type="submit">
-              Login
+              Login 🡢
             </button>
           </div>
         </form>
-        <a className="texs">Don't have an account? </a>
+        <a className="texp">Don't have an account? </a>
         <Link to="/register">Sign up</Link>
       </div>
     </div>
