@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "DM Sans";
+  src: url("./DMSans-Regular.ttf") format("truetype");
+}
+
 .form-container {
   display: flex;
   justify-content: center;
@@ -38,7 +43,8 @@
 .signup-form input[type="text"],
 .signup-form input[type="email"],
 .signup-form input[type="password"] {
-  width: 100%;
+  width: 350px;
+  height: 35px;
   padding: 10px;
   font-size: 16px;
   border: none;
@@ -48,7 +54,7 @@
   transition: all 0.3s ease-in-out;
   background: #e9e9e9;
   border: 1px solid #d7d7d7;
-  border-radius: 15px;
+  border-radius: 10px;
   box-shadow: 0px 58px 23px rgba(25, 25, 26, 0.01),
     0px 33px 20px rgba(25, 25, 26, 0.05), 0px 15px 15px rgba(25, 25, 26, 0.09),
     0px 4px 8px rgba(25, 25, 26, 0.1), 0px 0px 0px rgba(25, 25, 26, 0.1);
@@ -67,8 +73,9 @@
 }
 
 .signup-form button[type="submit"] {
-  display: block;
-  width: 100%;
+  /* display: block; */
+  /* width: 100%; */
+  height: 55px;
   margin-top: 30px;
   background-color: #8c4bff;
   color: #fff;
@@ -76,9 +83,12 @@
   font-weight: bold;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 12px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
+  box-shadow: 0px 58px 23px rgba(25, 25, 26, 0.01),
+    0px 33px 20px rgba(25, 25, 26, 0.05), 0px 15px 15px rgba(25, 25, 26, 0.09),
+    0px 4px 8px rgba(25, 25, 26, 0.1), 0px 0px 0px rgba(25, 25, 26, 0.1);
 }
 
 .signup-form button[type="submit"]:hover {
@@ -92,11 +102,11 @@
   transition: all 0.3s ease-in-out;
 }
 
-.signup-form a:hover {
+/* .signup-form a:hover {
   color: #7232ff;
   border-bottom-color: #7232ff;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .signup-form .login-link {
   margin-top: 20px;
@@ -107,7 +117,7 @@
 
 .signup-form button[type="submit"] {
   margin-top: 30px;
-  width: 109%;
+  width: 100%;
 }
 
 .texs {

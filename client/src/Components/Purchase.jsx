@@ -69,19 +69,19 @@ export default function Purchase() {
   const tiers = [
     {
       name: "Starter",
-      price: 0.99,
+      price: 1,
       credits: 1,
       priceId: "price_1MvpaqFQGhTdTKMrJgYDYhON",
     },
     {
       name: "Bulk",
-      price: 3.99,
+      price: 4,
       credits: 5,
       priceId: "price_1MvpbIFQGhTdTKMrmjHGF4h2",
     },
     {
       name: "Pro",
-      price: 6.99,
+      price: 7,
       credits: 10,
       priceId: "price_1MvpbeFQGhTdTKMrYIpCsYGz",
     },
@@ -115,7 +115,8 @@ export default function Purchase() {
 
   return (
     <div className="container">
-      <h2>Purchase Credits</h2>
+      <h3 className="purch">Purchase Credits</h3>
+      <hr className="purch-hr" />
       <div className="credit-package-container">
         {tiers.map((tier, index) => (
           <div
@@ -125,10 +126,11 @@ export default function Purchase() {
               index === selectedTier ? "selected" : ""
             }`}
           >
-            <h3>{tier.name}</h3>
-            <p> credits</p>
+            <h3 className="tier-name">{tier.name}</h3>
+            <p className="price"> Credits</p>
             <div className="rowz">
               <svg
+                className="purch-svg"
                 width="30"
                 height="22"
                 viewBox="0 0 30 22"
@@ -140,12 +142,13 @@ export default function Purchase() {
                   fill="#7855FF"
                 />
               </svg>
-              <>|</>
-              <div>{tier.credits}</div>
+              <p className="line2">|</p>
+              <div className="price2">{tier.credits}</div>
             </div>
-            <p>Price</p>
+            <p className="price">Price</p>
             <div className="rowz">
               <svg
+                className="purch-svg1"
                 width="30"
                 height="18"
                 viewBox="0 0 30 18"
@@ -157,23 +160,26 @@ export default function Purchase() {
                   fill="#777777"
                 />
               </svg>
-              <>|</>
-              <div>${tier.price}</div>
+              <p className="line2">|</p>
+              <div className="price1">${tier.price}</div>
             </div>
           </div>
         ))}
       </div>
-      {selectedTier !== null && (
-        <button
-          onClick={() => {
+
+      <button
+        onClick={() => {
+          if (selectedTier !== null) {
             onCheckout(tiers[selectedTier]);
-            // navigate("/upload");
-          }}
-          className="purchase-button"
-        >
-          Purchase
-        </button>
-      )}
+          }
+
+          // navigate("/upload");
+        }}
+        className="purchase-button"
+      >
+        Purchase
+      </button>
+
       <div>Don't want to pay?</div>
       <div>Join Discord for free credits</div>
     </div>

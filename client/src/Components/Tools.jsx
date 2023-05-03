@@ -62,7 +62,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
           </Link>
         </div>
 
-        <div className="row">
+        <div className="row1">
           {" "}
           <svg
             className="first"
@@ -157,7 +157,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
             />
           </svg>
 
-          <div className="textP">Test Prediction </div>
+          <div className="textP">Prediction </div>
           <svg
             width="30"
             height="23"
@@ -171,7 +171,7 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
             />
           </svg>
           <div className="line">|</div>
-          <div className="numb">2</div>
+          <div className="numb1">2</div>
           <input
             className="box"
             type="checkbox"

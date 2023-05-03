@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./register.css";
 
 export default function Register() {
@@ -42,7 +43,6 @@ export default function Register() {
               <div className="label">Email</div>
               <input
                 for="grid-first-name"
-                placeholder="Email"
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -52,7 +52,6 @@ export default function Register() {
               <div className="label">Password</div>
               <input
                 for="grid-last-name"
-                placeholder="Password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -62,7 +61,6 @@ export default function Register() {
               <div className="label">Confirm Password</div>
               <input
                 for="grid-last-name"
-                placeholder="Password"
                 type="password"
                 value={password1}
                 onChange={(e) => setPassword1(e.target.value)}
@@ -76,6 +74,8 @@ export default function Register() {
             </button>
           </div>
         </form>
+        <a className="texp">Already have an account? </a>
+        <Link to="/login">Login</Link>
       </div>
     </div>
   );

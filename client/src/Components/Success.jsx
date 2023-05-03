@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import "./success.css";
 
 export default function Success() {
   const { selectedUser, updateCredits, fetchMe, setUser } = useAuth();
@@ -31,18 +32,22 @@ export default function Success() {
 
   // ... rest of the component
   return (
-    <div>
-      <h1>Payment Successful</h1>
-      <p>
-        Thank you for your purchase!{" "}
-        <button
-          onClick={() => {
-            navigate("/fileUpload");
-          }}
-        >
-          Upload Files
-        </button>
+    <div className="container">
+      <h1 className="title">Payment Successful</h1>
+      <hr />
+      <p className="mess">
+        Thank you for your purchase! You will receive an email receipt shortly.
+        <div className="mess">Click below to start Cramming.</div>{" "}
       </p>
+
+      <button
+        className="success-button"
+        onClick={() => {
+          navigate("/fileUpload");
+        }}
+      >
+        Upload Files
+      </button>
     </div>
   );
 }

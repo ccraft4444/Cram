@@ -31,7 +31,7 @@
     0px 33px 20px rgba(25, 25, 26, 0.05), 0px 15px 15px rgba(25, 25, 26, 0.09),
     0px 4px 8px rgba(25, 25, 26, 0.1), 0px 0px 0px rgba(25, 25, 26, 0.1);
   border-radius: 19px;
-  margin-bottom: 5px;
+  margin-bottom: 45px;
 }
 
 .selected {
@@ -69,16 +69,21 @@
   color: #eff3ff;
 }
 
-h2 {
-  text-decoration: underline #7855ff;
+.purch {
+  /* text-decoration: underline #7855ff; */
   font-family: "DM Sans";
   font-style: normal;
   font-weight: 500;
-  font-size: 28px;
+  font-size: 32px;
   line-height: 36px;
   text-align: center;
+  margin-bottom: 0px;
 
   color: #000000;
+}
+
+.tier-name {
+  font-size: 32px;
 }
 
 .discord {
@@ -87,8 +92,62 @@ h2 {
   color: gray;
 }
 
+.price {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+  margin-top: 0px;
+  /* identical to box height */
+
+  color: #777777;
+}
+
+.price2 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 42px;
+  /* identical to box height */
+
+  color: #7855ff;
+}
+
+.price1 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 42px;
+  /* identical to box height */
+
+  color: #777777;
+}
+
+.line2 {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 0px;
+  padding: 0px;
+  font-size: 36px;
+  padding-left: 3px;
+}
+
 .rowz {
   display: flex;
   flex-direction: row;
   margin-bottom: 5px;
+}
+
+.purch-hr {
+  margin-bottom: 70px;
+}
+.purch-svg {
+  margin-top: 8px;
+}
+
+.purch-svg1 {
+  margin-top: 12px;
 }

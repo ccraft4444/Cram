@@ -25,21 +25,6 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
     setSelectedFile(event.target.files[0]);
   };
 
-  async function genFlash() {
-    const flashCards = await axios.post("/routes/langChain/flashcard", {
-      studyGuide: text,
-    });
-    setResponse(flashCards);
-  }
-
-  async function genPrediction() {
-    const prediction = await axios.post("/routes/langChain/prediction", {
-      studyGuide: text,
-    });
-    console.log("prediction", prediction);
-    setResponse(prediction);
-  }
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -98,7 +83,15 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
           </div>
 
           <form onSubmit={handleFormSubmit}>
-            <input type="file" onChange={handleFileInputChange} />
+            <div>Drag and Drop file to upload</div>
+            <div className="upload-container">
+              <input
+                className="inp"
+                type="file"
+                onChange={handleFileInputChange}
+                accept="application/pdf"
+              />
+            </div>
             <button type="submit">Upload</button>
           </form>
         </div>

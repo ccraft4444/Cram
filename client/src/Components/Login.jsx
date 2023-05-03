@@ -37,10 +37,9 @@ export default function Login() {
           ) : null}
           <div>
             <div>
-              <div className="label">Username</div>
+              <div className="label">Email</div>
               <input
                 for="grid-first-name"
-                placeholder="Username"
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -50,7 +49,6 @@ export default function Login() {
               <div className="label">Password</div>
               <input
                 for="grid-last-name"
-                placeholder="Password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
