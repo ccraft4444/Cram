@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./navbar.css";
 import { BrowserRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -17,16 +18,24 @@ export default function Navbar() {
     <div class="flex justify-evenly items-center bg-slate-700 mb-6">
       {selectedUser.username === "Guest" ? (
         <>
-          <Link to="/login">Login</Link>
+          <button
+            className="log"
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            Login
+          </button>
         </>
       ) : null}
 
       {selectedUser.username !== "Guest" ? (
         <>
           <button
+            className="log"
             onClick={() => {
               logoutUser();
-              navigate("/");
+              navigate("/login");
             }}
           >
             Logout

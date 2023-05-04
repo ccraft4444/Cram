@@ -54,12 +54,14 @@ export default function Tools({ onRouteChange, studyGuide, onTotalChange }) {
     <div className="big">
       <div className="tools">
         <div className="links">
-          <Link to="/fileupload" className="text10">
+          {/* <Link to="/fileupload" className="text10">
             Upload
           </Link>
           <Link to="/tools" className="text">
             Tools
-          </Link>
+          </Link> */}
+          <div className="not-selected">Upload</div>
+          <div className="selected1">Tools</div>
         </div>
 
         <div className="row1">

@@ -70,7 +70,7 @@
 }
 
 .tools .button:hover {
-  background-color: #7f6ec1;
+  background-color: #4f2dd8;
 }
 
 .tools:nth-child(2) {
@@ -213,4 +213,32 @@
 .line {
   padding: 10px;
   font-size: x-large;
+}
+
+.selected1 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 36px;
+  text-align: center;
+  margin-right: 25px;
+  margin-left: 25px;
+  border-bottom: 3px solid #7855ff;
+
+  color: #777777;
+}
+
+.not-selected {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 36px;
+  text-align: center;
+
+  margin-right: 25px;
+  margin-left: 25px;
+
+  color: #777777;
 }

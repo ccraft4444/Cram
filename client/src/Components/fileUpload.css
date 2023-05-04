@@ -118,6 +118,7 @@
   transition: all 0.3s ease-in-out;
   width: 100%;
   margin-bottom: 10px;
+  cursor: pointer;
 
   font-family: "DM Sans";
   font-style: normal;

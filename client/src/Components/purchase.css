@@ -35,7 +35,7 @@
 }
 
 .selected {
-  border: 1px solid #7855ff;
+  border: 3px solid #7855ff;
 }
 
 .purchase-button {
@@ -45,8 +45,8 @@
   padding: 8px 16px;
   margin-top: 16px;
   cursor: pointer;
-  width: 45%;
-  height: 59px;
+  width: 500px;
+  height: 79px;
   margin-bottom: 10px;
 
   background: #7855ff;
@@ -150,4 +150,15 @@
 
 .purch-svg1 {
   margin-top: 12px;
+}
+
+.tep {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+  text-align: center;
+
+  color: #9a9a9a;
 }

@@ -180,8 +180,8 @@ export default function Purchase() {
         Purchase
       </button>
 
-      <div>Don't want to pay?</div>
-      <div>Join Discord for free credits</div>
+      <div className="tep">Don't want to pay?</div>
+      <div className="tep">Join Discord for free credits</div>
     </div>
   );
 }

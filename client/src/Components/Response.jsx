@@ -14,12 +14,12 @@ export default function Response({ response }) {
       <div className="text3">Good luck on your test!</div>
 
       <textarea
+        className="return"
         style={{ height: "200px", overflowY: "scroll" }}
         value={response}
       />
-      <p>{response}</p>
 
-      <h1 className="quiz">Upload to quizlet</h1>
+      <h1 className="quiz">Upload to quizlet (flashcards)</h1>
       <hr />
       <ls>
         <li>Copy your study tools</li>
