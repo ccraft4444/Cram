@@ -15,7 +15,12 @@ export default function Response({ response }) {
 
       <textarea
         className="return"
-        style={{ height: "200px", overflowY: "scroll" }}
+        style={{
+          height: "200px",
+          overflowY: "scroll",
+          overflow: "hidden",
+          resize: "none",
+        }}
         value={response}
       />
 

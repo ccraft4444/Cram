@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Stripe from "stripe";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import "./purchase.css";
@@ -180,8 +180,10 @@ export default function Purchase() {
         Purchase
       </button>
 
-      <div className="tep">Don't want to pay?</div>
-      <div className="tep">Join Discord for free credits</div>
+      <div className="tep1">Don't want to pay?</div>
+      <Link to="https://discord.gg/egEWKgadqU" className="tep">
+        Join Discord for free credits
+      </Link>
     </div>
   );
 }

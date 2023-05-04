@@ -160,5 +160,16 @@
   line-height: 26px;
   text-align: center;
 
+  color: #7855ff;
+}
+
+.tep1 {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 26px;
+  text-align: center;
+
   color: #9a9a9a;
 }

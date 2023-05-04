@@ -110,33 +110,32 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
   };
 
   return (
-    <div>
-      <div className="primaryContainer">
-        <div className="uploadForm">
-          <div className="links">
-            {/* <Link to="/fileupload" className="text">
-              Upload
-            </Link>
-            <Link to="/tools" className="text10">
-              Tools
-            </Link> */}
-            <div className="selected1">Upload</div>
-            <div className="not-selected">Tools</div>
-          </div>
-
+    <div className="primaryContainer">
+      <div className="uploadForm">
+        <div className="links">
+          <div className="selected1">Upload</div>
+          <div className="not-selected">Tools</div>
+        </div>
+        <div className="form-row">
           <form onSubmit={handleFormSubmit}>
-            <div>Drag and Drop file to upload</div>
-            {/* <div className="upload-container"> */}
-            <input
-              className="inp"
-              type="file"
-              onChange={handleFileInputChange}
-              accept="application/pdf"
-              multiple
-            />
-            {/* </div> */}
+            <div className="upload-container">
+              <input
+                className="inp"
+                type="file"
+                onChange={handleFileInputChange}
+                accept="application/pdf"
+                multiple
+              />
+            </div>
             <button type="submit">Upload</button>
           </form>
+          <div className="text-container">
+            <div className="tx">
+              Drag and Drop files into the box on the left
+            </div>
+            <div className="txx">Files Uploaded:</div>
+            <div className="tx">files here</div>
+          </div>
         </div>
       </div>
     </div>
