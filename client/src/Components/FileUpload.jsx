@@ -13,6 +13,7 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
   const [response, setResponse] = useState("");
   const [fileUploaded, setFileUploaded] = useState(false);
   const [error, setError] = useState("");
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,23 +22,68 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
     }
   }, [selectedUser]);
 
+  // const handleFileInputChange = (event) => {
+  //   setSelectedFile(event.target.files[0]);
+  // };
+
+  // const handleFormSubmit = async (event) => {
+  //   event.preventDefault();
+
+  //   if (!selectedFile) {
+  //     return;
+  //   }
+  //   console.log("selected user", selectedUser);
+
+  //   const formData = new FormData();
+  //   formData.append("pdfFile", selectedFile);
+
+  //   fetch("/routes/documents/extract-text", {
+  //     method: "POST",
+  //     body: formData,
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error(response.statusText);
+  //       }
+  //       return response.text();
+  //     })
+  //     .then((extractedText) => {
+  //       console.log("extracted text", extractedText);
+  //       const trimmedText = extractedText.trim();
+  //       setText(extractedText);
+  //       // setFileUploaded(true);
+  //       console.log("text", text);
+  //       onStudyGuideChange(trimmedText, () => {
+  //         navigate("/tools");
+  //       });
+  //       // onStudyGuideChange(trimmedText);
+  //       // setTimeout(() => {
+  //       //   navigate("/tools");
+  //       // }, 0);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //       setText("Error extracting text");
+  //     });
+  // };
+
   const handleFileInputChange = (event) => {
-    setSelectedFile(event.target.files[0]);
+    setSelectedFiles([...event.target.files]);
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    if (!selectedFile) {
+    if (!selectedFiles.length) {
       return;
     }
-    // const newTotalCredits = selectedUser.credits - 1;
-    // const newCredits = await updateCredits({ credits: newTotalCredits });
-    // setUser({ ...selectedUser, credits: newCredits });
-    console.log("selected user", selectedUser);
 
     const formData = new FormData();
-    formData.append("pdfFile", selectedFile);
+
+    // Append each file to the FormData
+    selectedFiles.forEach((file, index) => {
+      formData.append(`pdfFile${index}`, file);
+    });
 
     fetch("/routes/documents/extract-text", {
       method: "POST",
@@ -47,25 +93,19 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
-        return response.text();
+        return response.text(); // Use response.text() instead of response.json()
       })
       .then((extractedText) => {
-        console.log("extracted text", extractedText);
-        const trimmedText = extractedText.trim();
-        setText(extractedText);
-        // setFileUploaded(true);
-        console.log("text", text);
-        onStudyGuideChange(trimmedText, () => {
+        console.log("Extracted texts:", extractedText);
+
+        // Now you have an array of extracted texts, you can process them as needed
+        onStudyGuideChange(extractedText, () => {
           navigate("/tools");
         });
-        // onStudyGuideChange(trimmedText);
-        // setTimeout(() => {
-        //   navigate("/tools");
-        // }, 0);
       })
       .catch((error) => {
         console.error(error);
-        setText("Error extracting text");
+        setError("Error extracting text");
       });
   };
 
@@ -86,14 +126,15 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
 
           <form onSubmit={handleFormSubmit}>
             <div>Drag and Drop file to upload</div>
-            <div className="upload-container">
-              <input
-                className="inp"
-                type="file"
-                onChange={handleFileInputChange}
-                accept="application/pdf"
-              />
-            </div>
+            {/* <div className="upload-container"> */}
+            <input
+              className="inp"
+              type="file"
+              onChange={handleFileInputChange}
+              accept="application/pdf"
+              multiple
+            />
+            {/* </div> */}
             <button type="submit">Upload</button>
           </form>
         </div>
