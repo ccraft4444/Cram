@@ -32,6 +32,7 @@ hr {
 .rowington > div {
   flex-basis: 33%;
   text-align: center;
+  justify-content: center;
 }
 
 .svg-container {
@@ -48,4 +49,35 @@ hr {
 
 h1 {
   margin: 5px;
+}
+
+.gif {
+  width: 150px;
+  height: 150px;
+}
+
+.disp {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 21px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #777777;
+}
+
+.sit {
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 31px;
+  text-align: center;
+
+  width: 500px;
+
+  color: #777777;
 }

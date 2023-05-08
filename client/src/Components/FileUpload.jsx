@@ -23,52 +23,18 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
   }, [selectedUser]);
 
   // const handleFileInputChange = (event) => {
-  //   setSelectedFile(event.target.files[0]);
-  // };
-
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-
-  //   if (!selectedFile) {
-  //     return;
-  //   }
-  //   console.log("selected user", selectedUser);
-
-  //   const formData = new FormData();
-  //   formData.append("pdfFile", selectedFile);
-
-  //   fetch("/routes/documents/extract-text", {
-  //     method: "POST",
-  //     body: formData,
-  //   })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error(response.statusText);
-  //       }
-  //       return response.text();
-  //     })
-  //     .then((extractedText) => {
-  //       console.log("extracted text", extractedText);
-  //       const trimmedText = extractedText.trim();
-  //       setText(extractedText);
-  //       // setFileUploaded(true);
-  //       console.log("text", text);
-  //       onStudyGuideChange(trimmedText, () => {
-  //         navigate("/tools");
-  //       });
-  //       // onStudyGuideChange(trimmedText);
-  //       // setTimeout(() => {
-  //       //   navigate("/tools");
-  //       // }, 0);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       setText("Error extracting text");
-  //     });
+  //   setSelectedFiles([...event.target.files]);
   // };
 
   const handleFileInputChange = (event) => {
-    setSelectedFiles([...event.target.files]);
+    setSelectedFiles((prevState) => {
+      const newFiles = Array.from(event.target.files).filter((newFile) => {
+        return !prevState.some(
+          (existingFile) => existingFile.name === newFile.name
+        );
+      });
+      return [...prevState, ...newFiles];
+    });
   };
 
   const handleFormSubmit = async (event) => {
@@ -78,6 +44,7 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
       return;
     }
 
+    console.log(selectedFiles);
     const formData = new FormData();
 
     // Append each file to the FormData
@@ -134,7 +101,11 @@ export default function FileUploader({ onStudyGuideChange, onRouteChange }) {
               Drag and Drop files into the box on the left
             </div>
             <div className="txx">Files Uploaded:</div>
-            <div className="tx">files here</div>
+            <div className="tx">
+              {selectedFiles.map((file) => {
+                return <div>{file.name}</div>;
+              })}
+            </div>
           </div>
         </div>
       </div>
