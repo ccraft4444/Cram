@@ -28,7 +28,11 @@
     "stripe": "^11.18.0"
   },
   "prisma": {
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seed.js",
+    "binaryTargets": [
+      "native",
+      "rhel-openssl-1.0.x"
+    ]
   },
   "proxy": "<http://localhost:4242>"
 }
