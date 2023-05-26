@@ -44,9 +44,7 @@ export default function Loading({ onResponseChange, studyGuide, route }) {
       <hr />
       <img src={loadingGif} alt="Loading" className="gif" />
 
-      {/* <div className="rowington"> */}
       <div className="disp">{display}</div>
-      {/* </div> */}
 
       <p className="sit">
         Sit tight while our systems analyze your documents and build your custom
